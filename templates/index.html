@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Book Library Viewer</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background-color: #f4f6f8;
+            margin: 0;
+            padding: 40px;
+            color: #2b2b2b;
+        }
+        h1 {
+            text-align: center;
+            color: #1a1a2e;
+        }
+        .stats {
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+            margin: 20px 0 30px;
+        }
+        .stat-box {
+            background: #fff;
+            padding: 14px 24px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            text-align: center;
+            min-width: 100px;
+        }
+        .stat-box .num {
+            font-size: 1.6em;
+            font-weight: bold;
+            color: #1a1a2e;
+        }
+        .stat-box .label {
+            font-size: 0.8em;
+            color: #666;
+        }
+        table {
+            width: 100%;
+            max-width: 950px;
+            margin: 0 auto 40px;
+            border-collapse: collapse;
+            background: #fff;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+        th, td {
+            padding: 12px 16px;
+            text-align: center;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        th {
+            background-color: #1a1a2e;
+            color: #fff;
+        }
+        tr:hover {
+            background-color: #f0f4ff;
+        }
+        .status-available { color: #2e7d32; font-weight: bold; }
+        .status-checked-out { color: #c62828; font-weight: bold; }
+        footer {
+            text-align: center;
+            margin-top: 10px;
+            color: #888;
+            font-size: 0.85em;
+        }
+    </style>
+</head>
+<body>
+    <h1>📚 Book Library Viewer</h1>
+
+    <div class="stats">
+        <div class="stat-box">
+            <div class="num">{{ stats.total }}</div>
+            <div class="label">Total Books</div>
+        </div>
+        <div class="stat-box">
+            <div class="num">{{ stats.available }}</div>
+            <div class="label">Available</div>
+        </div>
+        <div class="stat-box">
+            <div class="num">{{ stats.checked_out }}</div>
+            <div class="label">Checked Out</div>
+        </div>
+    </div>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Author</th>
+                <th>Genre</th>
+                <th>Year</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for book in books %}
+            <tr>
+                <td>{{ book.title }}</td>
+                <td>{{ book.author }}</td>
+                <td>{{ book.genre }}</td>
+                <td>{{ book.year }}</td>
+                {% if book.available %}
+                <td class="status-available">Available</td>
+                {% else %}
+                <td class="status-checked-out">Checked Out</td>
+                {% endif %}
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <footer>Flask Book Library Viewer &mdash; sample project</footer>
+</body>
+</html>
